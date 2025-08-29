@@ -97,6 +97,10 @@ public class CrawlerArenaMod extends Plugin {
             if(w.bullet instanceof SapBulletType sap) sap.sapStrength = 0f;
         });
 
+        Events.on(WorldLoadEndEvent.class, event -> {
+            reset()
+        }
+                
         Events.on(WorldLoadEvent.class, event -> {
             if(state.rules.defaultTeam.core() != null){
                 Core.app.post(() -> state.rules.defaultTeam.cores().each(c -> {
@@ -104,7 +108,6 @@ public class CrawlerArenaMod extends Plugin {
                 }));
             }
 
-            reset();
             Core.app.post(() -> {
                 state.rules.canGameOver = false;
                 state.rules.waveTimer = false;
